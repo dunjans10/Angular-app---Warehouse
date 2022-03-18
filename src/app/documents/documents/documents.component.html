@@ -1,0 +1,82 @@
+<br>
+<div class="row">
+    <div class="col">
+        <war-pagination [page]="params.page" [pageSize]="params.pageSize" [collectionSize]="documents.count"
+        (pageChange)="onPageChange($event)"></war-pagination>
+    </div>
+</div>
+
+<div class="col">
+
+    <small *ngIf="showSettings">
+        <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="" id="dateOfCreation" [(ngModel)] = "settings.dateOfCreation">
+            <label class="form-check-label" for="dateOfCreation">
+                Date of Creation
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="dateOfRecording" [(ngModel)] = "settings.dateOfRecording">
+            <label class="form-check-label" for="dateOfRecording">
+                Date of Recording
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="status" [(ngModel)] = "settings.status">
+            <label class="form-check-label" for="status">
+               Status
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="transactionType" [(ngModel)] = "settings.transactionType">
+            <label class="form-check-label" for="transactionType">
+                Transaction type
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="businessPartner" [(ngModel)] = "settings.bussinessPartner">
+            <label class="form-check-label" for="businessPartner">
+                Bussiness Partner
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="bussinessPartnerLocation" [(ngModel)] = "settings.bussinessPartnerLocation">
+            <label class="form-check-label" for="bussinessPartnerLocation">
+                Bussiness Partner Location
+            </label><br>
+
+            <input class="form-check-input" type="checkbox" value="" id="year" [(ngModel)] = "settings.year">
+            <label class="form-check-label" for="year">
+               Year
+            </label><br>
+
+          </div>
+    </small>
+    <button *ngIf="!showSettings" class="btn btn-outline-success" (click)="showSettings = !showSettings">Open table settings</button>
+    <button *ngIf="showSettings" class="btn btn-outline-success" (click)="showSettings = !showSettings">Close table settings</button>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <table class="table table-success table-hover">
+            <thead>
+                <tr>
+                  <th *ngIf="settings.dateOfCreation" scope="col" (click)="changeSort('dateOfCreation')" style="cursor: pointer;">Date of Creation</th>
+                  <th *ngIf="settings.dateOfRecording" scope="col" (click)="changeSort('dateOfRecording')" style="cursor: pointer;">Date of Recording</th>
+                  <th *ngIf="settings.status" scope="col" (click)="changeSort('status')" style="cursor: pointer;">Status</th>
+                  <th *ngIf="settings.transactionType" scope="col" (click)="changeSort('transactionType')" style="cursor: pointer;">Transaction Type</th>
+                  <th *ngIf="settings.bussinessPartner" scope="col">Bussiness Partner</th>
+                  <th *ngIf="settings.bussinessPartnerLocation" scope="col">Business Partner Location</th>
+                  <th *ngIf="settings.year" scope="col">Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor = "let doc of documents.results" style="cursor: pointer;" (click)="openDocument(doc._id)">
+                  <td *ngIf="settings.dateOfCreation">{{doc.dateOfCreation | date}}</td>
+                  <td *ngIf="settings.dateOfRecording">{{doc.dateOfRecording | date}}</td>
+                  <td *ngIf="settings.status">{{doc.status}}</td>
+                  <td *ngIf="settings.transactionType">{{doc.transactionType}}</td>
+                  <td *ngIf="settings.bussinessPartner">{{doc.businessPartner.name}}</td>
+                  <td *ngIf="settings.bussinessPartnerLocation">{{doc.businessPartner.city}} {{doc.businessPartner.address}}</td>
+                  <td *ngIf="settings.year">{{doc.year}}</td> 
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.information {
+    border: 1px solid rgba(187, 81, 10, 0.507);
+    background-color: antiquewhite;
+}
+
+.new_article {
+    border: 1px solid gold;
+    background-color: lightgoldenrodyellow;
+    border-top: none;
+}
+
+.articles {
+    border: 1px solid lightgreen;
+    background-color: aliceblue;
+    border-top: none;
+    border-right: none;
+}
